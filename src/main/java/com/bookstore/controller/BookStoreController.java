@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bookstore.entity.Book;
 import com.bookstore.services.IBookStoreService;
 
-@Controller
+@RestController
 @RequestMapping("bookservice")
+@CrossOrigin(origins = "http://localhost:5173") // Allow React dev server
 public class BookStoreController {
 	
 	@Autowired
@@ -52,7 +55,7 @@ public class BookStoreController {
 		return new ResponseEntity<Book>(b, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("books/{id}")
+	@DeleteMapping("books/{id}") //books/2
 	public ResponseEntity<String> deleteBook(@PathVariable("id") int id){
 		boolean isDeleted = service.deleteBook(id);
 		if(isDeleted){
