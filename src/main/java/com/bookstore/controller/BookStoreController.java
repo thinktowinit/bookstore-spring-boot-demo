@@ -30,7 +30,7 @@ public class BookStoreController {
 	@GetMapping("/checkApp")
 	public ResponseEntity<String> checkApp() {
 
-		return new ResponseEntity<String>("success", HttpStatus.OK);
+		return new ResponseEntity<String>("success2", HttpStatus.OK);
 
 	}
 
