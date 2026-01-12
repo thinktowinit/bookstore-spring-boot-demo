@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-container
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Strong@1234
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./init.sql:/init.sql
+    command: >
+      /bin/bash -c "
+      /opt/mssql/bin/sqlservr &
+      echo 'Waiting for SQL Server to start...' &&
+      sleep 30 &&
+      /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Strong@1234' -i /init.sql &&
+      echo 'Database bookstore2 created successfully!' &&
+      wait
+      "
+
+  springboot-app:
+    build: .
+    container_name: springboot-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=bookstore2;encrypt=true;trustServerCertificate=true
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: Strong@1234
