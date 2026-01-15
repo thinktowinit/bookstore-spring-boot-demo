@@ -23,11 +23,19 @@ spec:
                 configMapKeyRef:
                   name: bookstore-config
                   key: DB_URL
+
+            - name: EDIT_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: bookstore-config
+                  key: EDIT_CONFIG
+
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: bookstore-secret
                   key: DB_USERNAME
+
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
