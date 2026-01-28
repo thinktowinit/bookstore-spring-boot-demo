@@ -43,7 +43,7 @@ public class BookStoreService implements IBookStoreService {
 
 	@Override
 	public Book updateBook(int bookId, Book book) {
-
+System.out.println("fgsdgdfgfg===========");
 		bookId = 0;
 
 		book.setId(bookId);
