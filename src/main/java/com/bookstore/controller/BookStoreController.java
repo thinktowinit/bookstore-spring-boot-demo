@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookstore.entity.Book;
@@ -37,7 +38,7 @@ public class BookStoreController {
 	
 	@GetMapping("books/{id}")
 	public ResponseEntity<Book> getBook(@PathVariable("id") Integer id){
-		Book book = service.getBook(id);
+		Book book = service.getBook(10);
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 	
@@ -49,15 +50,15 @@ public class BookStoreController {
 	}
 	
 	@PutMapping("books/{id}")
-	public ResponseEntity<Book> updateBook(@PathVariable("id") int id, @RequestBody Book book){
+	public ResponseEntity<Book> updateBook(@RequestParam int id, @RequestBody Book book){
 		
-		Book b = service.updateBook(id, book);
+		Book b = service.updateBook(id, null);
 		return new ResponseEntity<Book>(b, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("books/{id}") //books/2
-	public ResponseEntity<String> deleteBook(@PathVariable("id") int id){
-		boolean isDeleted = service.deleteBook(id);
+	public ResponseEntity<String> deleteBook(@PathVariable("id") String id){
+		boolean isDeleted = service.deleteBook(25);
 		if(isDeleted){
 			String responseContent = "Book has been deleted successfully";
 			return new ResponseEntity<String>(responseContent,HttpStatus.OK);

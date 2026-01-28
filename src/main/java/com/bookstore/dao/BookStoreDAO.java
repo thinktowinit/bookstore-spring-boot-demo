@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bookstore.entity.Book;
 
 @Transactional
-@Repository
 public class BookStoreDAO implements IBookStoreDAO {
 	
 	@PersistenceContext
