@@ -2,6 +2,8 @@ package com.bookstore.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +27,15 @@ import com.bookstore.services.IBookStoreService;
 @CrossOrigin(origins = "http://localhost:5173") // Allow React dev server
 public class BookStoreController {
 	
+	private static final Logger logger =
+            LoggerFactory.getLogger(BookStoreController.class);
+	
 	@Autowired
 	private IBookStoreService service;
 	
 	@GetMapping("books")
 	public ResponseEntity<List<Book>> getBooks(){
-		
+		logger.info("getBooks started");
 		List<Book> books = service.getBooks();
 		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
 		
