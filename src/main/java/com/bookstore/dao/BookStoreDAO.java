@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bookstore.entity.Book;
 
 @Transactional
+@Repository
 public class BookStoreDAO implements IBookStoreDAO {
 	
 	@PersistenceContext
@@ -23,7 +24,6 @@ public class BookStoreDAO implements IBookStoreDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Book> getBooks() {
-		
 		String hql = "FROM Book as atcl ORDER BY atcl.id";
 		return (List<Book>) entityManager.createQuery(hql).getResultList();
 	}
