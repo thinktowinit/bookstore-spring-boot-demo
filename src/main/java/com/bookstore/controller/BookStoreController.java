@@ -24,7 +24,7 @@ import com.bookstore.services.IBookStoreService;
 
 @RestController
 @RequestMapping("bookservice")
-@CrossOrigin(origins = "http://localhost:5173") // Allow React dev server
+@CrossOrigin(origins = "http://localhost:5174") // Allow React dev server
 public class BookStoreController {
 	
 	private static final Logger logger =
