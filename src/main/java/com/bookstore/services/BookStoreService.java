@@ -3,6 +3,9 @@ package com.bookstore.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.dao.IBookStoreDAO;
@@ -10,7 +13,8 @@ import com.bookstore.entity.Book;
 
 @Service
 public class BookStoreService implements IBookStoreService {
-
+	private static final Logger log = LoggerFactory.getLogger(BookStoreService.class);
+@Autowired
 	private IBookStoreDAO dao;
 
 	@Override
@@ -29,17 +33,11 @@ public class BookStoreService implements IBookStoreService {
 
 	@Override
 	public Book createBook(Book book) {
-
-		System.out.println(book.getName());
-
-		book.setName(null);
-
-		book.setPages(0);
-
-		dao.createBook(book);
-
-		return book;
+		log.info("Service: createBook started");
+		return dao.createBook(book);
 	}
+	
+	
 
 	@Override
 	public Book updateBook(int bookId, Book book) {
