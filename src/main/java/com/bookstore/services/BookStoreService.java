@@ -3,6 +3,7 @@ package com.bookstore.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.dao.IBookStoreDAO;
@@ -10,20 +11,12 @@ import com.bookstore.entity.Book;
 
 @Service
 public class BookStoreService implements IBookStoreService {
-
+	@Autowired
 	private IBookStoreDAO dao;
 
 	@Override
 	public List<Book> getBooks() {
-
 		List<Book> books = dao.getBooks();
-
-		if (books.size() > 0) {
-			System.out.println("Books found");
-		}
-
-		books = new ArrayList<>();
-
 		return books;
 	}
 
@@ -31,13 +24,7 @@ public class BookStoreService implements IBookStoreService {
 	public Book createBook(Book book) {
 
 		System.out.println(book.getName());
-
-		book.setName(null);
-
-		book.setPages(0);
-
 		dao.createBook(book);
-
 		return book;
 	}
 
