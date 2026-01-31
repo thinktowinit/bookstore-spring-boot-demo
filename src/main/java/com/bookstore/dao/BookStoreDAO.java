@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bookstore.entity.Book;
-
+@Repository
 @Transactional
 public class BookStoreDAO implements IBookStoreDAO {
 	
